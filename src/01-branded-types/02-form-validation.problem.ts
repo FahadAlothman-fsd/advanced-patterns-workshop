@@ -15,7 +15,7 @@ export const validateValues = (values: { email: string; password: string }) => {
   return {
     email: values.email,
     password: values.password,
-  };
+  } as { email: Email; password: Password };
 };
 
 const createUserOnApi = (values: { email: Email; password: Password }) => {
