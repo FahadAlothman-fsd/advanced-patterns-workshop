@@ -1,6 +1,10 @@
 import { expect, it } from "vitest";
 import { Equal, Expect } from "../helpers/type-utils";
 
+declare global {
+  function myFunc(): boolean;
+  var myVar: number;
+}
 /**
  * Clues:
  *
@@ -17,7 +21,7 @@ import { Equal, Expect } from "../helpers/type-utils";
  * var myVar: number
  */
 
-globalThis.myFunc = () => true;
+globalThis.myFunc = (): boolean => true;
 globalThis.myVar = 1;
 
 it("Should let you call myFunc without it being imported", () => {

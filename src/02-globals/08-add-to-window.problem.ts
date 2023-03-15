@@ -1,6 +1,11 @@
 import { expect, it } from "vitest";
 import { Equal, Expect } from "../helpers/type-utils";
 
+declare global {
+  interface Window {
+    makeGreeting: () => string;
+  }
+}
 /**
  * Clues:
  *
@@ -21,6 +26,6 @@ it("Should let you call makeGreeting from the window object", () => {
 it("Should not be available on globalThis", () => {
   expect(
     // @ts-expect-error
-    globalThis.makeGreeting,
+    globalThis.makeGreeting
   ).toBe(undefined);
 });

@@ -6,7 +6,7 @@ import { expect, it } from "vitest";
  */
 
 declare global {
-  interface DispatchableEvent {
+  interface DispatchableEventSolution {
     LOG_IN: {
       username: string;
       password: string;
@@ -20,10 +20,10 @@ declare global {
    * { type: 'LOG_IN'; username: string; password: string; }
    */
   type UnionOfDispatchableEvents = {
-    [K in keyof DispatchableEvent]: {
+    [K in keyof DispatchableEventSolution]: {
       type: K;
-    } & DispatchableEvent[K];
-  }[keyof DispatchableEvent];
+    } & DispatchableEventSolution[K];
+  }[keyof DispatchableEventSolution];
 }
 
 const dispatchEvent = (event: UnionOfDispatchableEvents) => {
