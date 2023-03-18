@@ -9,11 +9,15 @@ import { Equal, Expect } from "../helpers/type-utils";
 const app = express();
 
 const makeTypeSafeGet =
-  (
-    parser: (queryParams: Request["query"]) => unknown,
-    handler: RequestHandler
+  <QueryType extends Request["query"]>(
+    parser: (queryParams: Request["query"]) => QueryType,
+    handler: RequestHandler<any, any, any, QueryType>
   ) =>
-  (req: Request, res: Response, next: NextFunction) => {
+  (
+    req: Request<any, any, any, QueryType>,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
       parser(req.query);
     } catch (e) {
